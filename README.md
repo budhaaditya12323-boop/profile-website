@@ -41,10 +41,12 @@ Before you begin, ensure you have the following installed on your host machine:
 4. Generate APP_KEY value: `docker compose exec php-fpm php artisan key:generate`
 5. Run the database migrations: `docker compose exec php-fpm php artisan migrate`
 6. Access the Applications via this url:
+
 | Services | URL |
 |----------|-----|
 | Laravel APP | http://localhost:8000 |
 | phpMyAdmin | http://localhost:8080 |
+
 > Log into phpMyAdmin with the `DB_USERNAME` and `DB_PASSWORD` from your `.env` file. To log in as root, use the `MYSQL_ROOT_PASSWORD` value.
 7. Voila! your container is up and ready to use
 > To stop the container, you can use: `docker compose down`
