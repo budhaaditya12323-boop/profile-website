@@ -4,6 +4,7 @@ A Laravel application running in a fully containerized Docker environment. No lo
 
 Made by: I Putu Budha Aditya
 
+---
 
 ## Requirements
 
@@ -30,4 +31,22 @@ Before you begin, ensure you have the following installed on your host machine:
 | Composer | 2 | PHP dependency manager |
 | phpMyAdmin | 5 | Database administration UI |
 
+---
 
+## How To Run it
+1. Clone Repository: `git clone git@github.com:budhaaditya12323-boop/profile-website.git`
+2. Copy the example environment file and generate an application key: `cp .env.example .env`
+3. Build and start docker container: `docker compose up -d --build`
+> First build takes 5 - 10 minutes
+4. Generate APP_KEY value: `docker compose exec php-fpm php artisan key:generate`
+5. Run the database migrations: `docker compose exec php-fpm php artisan migrate`
+6. Access the Applications via this url:
+| Services | URL |
+|----------|-----|
+| Laravel APP | http://localhost:8000 |
+| phpMyAdmin | http://localhost:8080 |
+> Log into phpMyAdmin with the `DB_USERNAME` and `DB_PASSWORD` from your `.env` file. To log in as root, use the `MYSQL_ROOT_PASSWORD` value.
+7. Voila! your container is up and ready to use
+> To stop the container, you can use: `docker compose down`
+
+# Make Sure to exclude `.env`, addressed it in `.gitignore` before push into your repo
