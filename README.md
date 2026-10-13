@@ -34,12 +34,17 @@ Before you begin, ensure you have the following installed on your host machine:
 ---
 
 ## How To Run it
+
+**Prerequisites:** [Git](https://git-scm.com/) and [Docker](https://docs.docker.com/get-docker/) with Docker Compose v2.
+
 1. Clone Repository: `git clone git@github.com:budhaaditya12323-boop/profile-website.git`
-2. Copy the example environment file and generate an application key: `cp .env.example .env`
+2. Copy the example environment file: `cp .env.example .env`
+   > Open `.env` and set `DB_USERNAME`, `DB_PASSWORD`, and `MYSQL_ROOT_PASSWORD` before continuing. You'll need them to log into phpMyAdmin in step 6.
 3. Build and start docker container: `docker compose up -d --build`
-> First build takes 5 - 10 minutes
-4. Generate APP_KEY value: `docker compose exec php-fpm php artisan key:generate`
+   > First build takes 5 - 10 minutes
+4. Generate APP_KEY value (this writes the key into your `.env` file): `docker compose exec php-fpm php artisan key:generate`
 5. Run the database migrations: `docker compose exec php-fpm php artisan migrate`
+   > If this fails with a connection error, the database is probably still starting. Wait a few seconds and run the command again.
 6. Access the Applications via this url:
 
 | Services | URL |
@@ -47,8 +52,12 @@ Before you begin, ensure you have the following installed on your host machine:
 | Laravel APP | http://localhost:8000 |
 | phpMyAdmin | http://localhost:8080 |
 
-> Log into phpMyAdmin with the `DB_USERNAME` and `DB_PASSWORD` from your `.env` file. To log in as root, use the `MYSQL_ROOT_PASSWORD` value.
+   > Log into phpMyAdmin with the `DB_USERNAME` and `DB_PASSWORD` from your `.env` file. To log in as root, use the `MYSQL_ROOT_PASSWORD` value.
+   
 7. Voila! your container is up and ready to use
+
 > To stop the container, you can use: `docker compose down`
 
-# Make Sure to exclude `.env`, addressed it in `.gitignore` before push into your repo
+## Make Sure to exclude `.env`
+
+Never commit your `.env` file. Make sure it is listed in `.gitignore` before pushing to your repo.
